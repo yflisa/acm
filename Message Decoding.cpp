@@ -7,17 +7,17 @@ int readchar()
 	for(;;)
 	{
 		int ch = getchar();
-		if(ch != '\n' || ch != '\r')
+		if(ch != '\r' && ch != '\n')
 			return ch;
 	}
 }
 
-int readint(int len)
+int readint(int n)
 {
 	int v = 0;
-	while(len--)
+	while(n--)
 	{
-		v = v * 2 + readchar() - '0'
+		v = v * 2 + readchar() - '0';
 	}
 	return v;
 }
@@ -26,9 +26,9 @@ int readcodes()
 {
 	memset(code, 0, sizeof(code));
 	code[1][0] = readchar();
-	for(int len = 2; len <= 7; len++)
+	for(int len = 2; len <=7; len++)
 	{
-		for(int i = 0; i < (1<<len-1); i++)
+		for(int i = 0; i < (1 << len)-1; i++)
 		{
 			int ch = getchar();
 			if(ch == EOF)
@@ -38,6 +38,7 @@ int readcodes()
 			code[len][i] = ch;
 		}
 	}
+	return 1;
 }
 
 int main()
@@ -52,7 +53,7 @@ int main()
 			for(;;)
 			{
 				int v = readint(len);
-				if(v == 1<<len-1)
+				if(v == (1 << len)-1)
 					break;
 				putchar(code[len][v]);
 			}
